@@ -60,10 +60,10 @@ ol b { color: var(--ink); }
     <h2>New to Health Atlas?</h2>
     <ol>
       <li>Get the app free through Apple’s TestFlight beta.</li>
-      <li>Come back to this message and tap the link again.</li>
-      <li>Tap <b>Open in Health Atlas</b>. The challenge is waiting.</li>
+      <li>Open Health Atlas and tap <b>I have a challenge link</b>. We copy it for you when you tap the button below.</li>
+      <li>Or come back to this message, tap the link again, and tap <b>Open in Health Atlas</b>.</li>
     </ol>
-    <a class="btn ghost" href="https://testflight.apple.com/join/M2NSKhzb">Get Health Atlas</a>
+    <a class="btn ghost" id="get" href="https://testflight.apple.com/join/M2NSKhzb">Get Health Atlas</a>
   </section>
   <p class="foot">The challenge travels inside this link. It isn’t sent to or stored on any server. <a href="privacy.html">Privacy</a> · <a href="./">Support</a></p>
 </main>
@@ -102,6 +102,8 @@ ol b { color: var(--ink); }
     document.getElementById('sub').textContent = 'Best ' + x[1].toLowerCase() + ' by ' + end + ' wins.';
   }
   document.title = name + ' challenged you on Health Atlas';
+  // getting the app: keep the challenge on the clipboard so the app can pick it up after installing
+  document.getElementById('get').addEventListener('click', function () { try { navigator.clipboard.writeText(location.href); } catch (e) { /* no clipboard */ } });
 })();
 </script>
 </body>
