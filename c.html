@@ -95,7 +95,7 @@ ol b { color: var(--ink); }
   if (val) { document.getElementById('val').textContent = val; document.getElementById('what').textContent = what; document.getElementById('big').hidden = false; }
   // a 7-day duel: first day, last day, and the sender's best so far
   if (x && p[9] && p[10]) {
-    var de = n(p[10]), end = new Date(de * 864e5 + 432e5).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' }), w = n(p[11]);
+    var de = n(p[10]), du = new Date(de * 864e5), end = new Date(du.getUTCFullYear(), du.getUTCMonth(), du.getUTCDate(), 12).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' }), w = n(p[11]);
     document.getElementById('t').textContent = name + ' started a duel';
     if (w != null) { document.getElementById('val').textContent = x[2] === 't' ? secs(w) : x[2] === 'score' ? String(w / 2) : String(w); document.getElementById('what').textContent = 'their best so far · ' + x[1]; document.getElementById('big').hidden = false; }
     else { document.getElementById('val').textContent = x[1]; document.getElementById('what').textContent = '7-day duel'; document.getElementById('big').hidden = false; }
