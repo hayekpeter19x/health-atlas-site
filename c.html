@@ -71,7 +71,7 @@ ol b { color: var(--ink); }
 // The part after "#" holds the challenge card. Browsers never send it to the website, so it stays between friends.
 (function () {
   var CH = [['plank', 'Plank', 't'], ['hang', 'Dead hang', 't'], ['wallsit', 'Wall sit', 't'], ['pushups', 'Push-ups', 'n', 'push-ups'], ['pullups', 'Pull-ups', 'n', 'pull-ups'],
-    ['steps', 'Steps', 'steps'], ['sleep', 'Good nights', 'sleep'], ['balance', 'One-leg balance', 't'], ['chair', 'Chair stands', 'n', 'stands in 30 seconds'], ['sitrise', 'Sit and rise', 'score'], ['vo2', 'VO₂ max', 'vo2']];
+    ['steps', 'Steps', 'steps'], ['sleep', 'Good nights', 'sleep'], ['balance', 'One-leg balance', 't'], ['chair', 'Chair stands', 'n', 'stands in 30 seconds'], ['sitrise', 'Sit and rise', 'score'], ['vo2', 'VO₂ max', 'vo2'], ['kneepush', 'Knee push-ups', 'n', 'knee push-ups']];
   var code = (location.hash || '').slice(1);
   if (/iPhone|iPad|iPod/.test(navigator.userAgent) === false && !/Macintosh/.test(navigator.userAgent)) document.documentElement.className = 'is-desk';
   if (!/^2\.[A-Za-z0-9%.!-]+$/.test(code)) { document.getElementById('open').href = 'healthatlas://'; return; }
