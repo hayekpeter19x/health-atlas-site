@@ -65,7 +65,7 @@ ol b { color: var(--ink); }
     </ol>
     <a class="btn ghost" id="get" href="https://testflight.apple.com/join/M2NSKhzb">Get Health Atlas</a>
   </section>
-  <p class="foot">The challenge travels inside this link. It isn’t sent to or stored on any server. <a href="privacy.html">Privacy</a> · <a href="./">Support</a></p>
+  <p class="foot">The challenge is locked, and only this link can unlock it. We keep the locked copy for 90 days and can’t read it. <a href="privacy.html">Privacy</a> · <a href="./">Support</a></p>
 </main>
 <script>
 // The part after "#" holds the challenge card. Browsers never send it to the website, so it stays between friends.
@@ -73,9 +73,37 @@ ol b { color: var(--ink); }
   var CH = [['plank', 'Plank', 't'], ['hang', 'Dead hang', 't'], ['wallsit', 'Wall sit', 't'], ['pushups', 'Push-ups', 'n', 'push-ups'], ['pullups', 'Pull-ups', 'n', 'pull-ups'],
     ['steps', 'Steps', 'steps'], ['sleep', 'Good nights', 'sleep'], ['balance', 'One-leg balance', 't'], ['chair', 'Chair stands', 'n', 'stands in 30 seconds'], ['sitrise', 'Sit and rise', 'score'], ['vo2', 'VO₂ max', 'vo2'], ['kneepush', 'Knee push-ups', 'n', 'knee push-ups']];
   var code = (location.hash || '').slice(1);
+  // getting the app: keep the challenge on the clipboard so the app can pick it up after installing
+  document.getElementById('get').addEventListener('click', function () { try { navigator.clipboard.writeText(location.href); } catch (e) { /* no clipboard */ } });
   if (/iPhone|iPad|iPod/.test(navigator.userAgent) === false && !/Macintosh/.test(navigator.userAgent)) document.documentElement.className = 'is-desk';
+  // A short link (10 characters, since the app's build 105): the card is stored locked. Fetch it by a fingerprint of the
+  // code and unlock it here with the code (PBKDF2 then AES-GCM, the same as the app). The code never leaves this page.
+  if (/^[A-Za-z0-9]{10}$/.test(code) && window.crypto && crypto.subtle) {
+    document.getElementById('open').href = 'healthatlas://c/' + code;
+    var te = new TextEncoder();
+    crypto.subtle.importKey('raw', te.encode(code), 'PBKDF2', false, ['deriveBits']).then(function (base) {
+      return crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: te.encode('health-atlas-link-v1'), iterations: 100000 }, base, 512);
+    }).then(function (buf) {
+      var bits = new Uint8Array(buf), id = Array.prototype.map.call(bits.slice(32, 48), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+      return Promise.all([crypto.subtle.importKey('raw', bits.slice(0, 32), 'AES-GCM', false, ['decrypt']),
+        fetch('https://nmpshfvzyfkrsuwbpgzc.supabase.co/functions/v1/link?id=' + id).then(function (r) { if (!r.ok) throw new Error(r.status === 404 ? 'gone' : 'link'); return r.json(); })]);
+    }).then(function (kr) {
+      var s = String(kr[1].box || '').replace(/-/g, '+').replace(/_/g, '/'), raw = atob(s + '==='.slice((s.length + 3) % 4)), box = new Uint8Array(raw.length);
+      for (var i = 0; i < raw.length; i++) box[i] = raw.charCodeAt(i);
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: box.slice(0, 12) }, kr[0], box.slice(12));
+    }).then(function (pt) {
+      var card = new TextDecoder().decode(pt);
+      if (/^2\.[A-Za-z0-9%.!-]+$/.test(card)) show(card, true);
+    }).catch(function (e) {
+      document.getElementById('t').textContent = e && e.message === 'gone' ? 'This challenge has expired' : 'Couldn’t load this challenge';
+      document.getElementById('sub').textContent = e && e.message === 'gone' ? 'Challenge links last 90 days. Ask your friend for a new one.' : 'Check your connection and open the link again.';
+    });
+    return;
+  }
   if (!/^2\.[A-Za-z0-9%.!-]+$/.test(code)) { document.getElementById('open').href = 'healthatlas://'; return; }
   document.getElementById('open').href = 'healthatlas://c/' + code;
+  show(code);
+  function show(code) {
   var p = code.split('.'), name = 'A friend';
   try { name = decodeURIComponent(p[2] || '').slice(0, 20) || name; } catch (e) { /* keep the default */ }
   var n = function (v) { return v ? parseInt(v, 36) : null; };
@@ -102,8 +130,7 @@ ol b { color: var(--ink); }
     document.getElementById('sub').textContent = 'Best ' + x[1].toLowerCase() + ' by ' + end + ' wins.';
   }
   document.title = name + ' challenged you on Health Atlas';
-  // getting the app: keep the challenge on the clipboard so the app can pick it up after installing
-  document.getElementById('get').addEventListener('click', function () { try { navigator.clipboard.writeText(location.href); } catch (e) { /* no clipboard */ } });
+  }
 })();
 </script>
 </body>
