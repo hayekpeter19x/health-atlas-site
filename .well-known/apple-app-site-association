@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "G876W37TY5.com.peterhayek.healthatlas"
+        ],
+        "components": [
+          {
+            "/": "/c",
+            "comment": "challenge links: the card rides after the #"
+          }
+        ]
+      }
+    ]
+  }
+}
