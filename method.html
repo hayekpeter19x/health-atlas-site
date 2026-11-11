@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How the Atlas score works</title>
+<style>
+:root { --bg: #f4f5f8; --card: #fff; --ink: #15171c; --muted: #5f6470; --line: #e3e6ec; --accent: #0a6cff; }
+@media (prefers-color-scheme: dark) { :root { --bg: #000; --card: #16181d; --ink: #f3f4f7; --muted: #a2a7b2; --line: #2c3038; --accent: #3d8bff; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+main { max-width: 680px; margin: 0 auto; padding: 40px 16px 64px; }
+h1 { font-size: 32px; line-height: 1.15; margin: 0 0 6px; letter-spacing: -.02em; }
+.sub { color: var(--muted); margin: 0 0 28px; }
+section { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; margin-bottom: 12px; }
+h2 { font-size: 17px; margin: 0 0 4px; }
+p { margin: 0; color: var(--muted); }
+p + p { margin-top: 10px; }
+table { width: 100%; border-collapse: collapse; margin-top: 8px; color: var(--muted); }
+td { padding: 6px 0; border-top: 1px solid var(--line); }
+td:last-child { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); }
+a { color: var(--accent); }
+footer { margin-top: 28px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>How the Atlas score works</h1>
+  <p class="sub">One number from 0 to 100, built from nine areas. Here is exactly how it adds up.</p>
+  <section><h2>Nine areas</h2><p>Each area has a short list of basics: habits you answer questions about, and results you can add (blood tests, blood pressure, Apple Health numbers). An area's score is the share of its basics you have covered, from 0 to 100. A blood result counts in full when it is in the optimal range, a little over half when it is in the normal range, and only a little when it needs work.</p></section>
+  <section><h2>How much each area counts</h2><p>The Atlas score is the average of your area scores, with some areas counting more than others.</p>
+    <table>
+      <tr><td>Heart</td><td>15.5%</td></tr>
+      <tr><td>Fitness</td><td>13.4%</td></tr>
+      <tr><td>Habits</td><td>13.4%</td></tr>
+      <tr><td>Metabolism</td><td>12.4%</td></tr>
+      <tr><td>Sleep</td><td>10.3%</td></tr>
+      <tr><td>Nutrition</td><td>10.3%</td></tr>
+      <tr><td>Mind</td><td>10.3%</td></tr>
+      <tr><td>Prevention</td><td>8.2%</td></tr>
+      <tr><td>Home and air</td><td>6.2%</td></tr>
+    </table></section>
+  <section><h2>When an area has no score yet</h2><p>An area you have not answered enough about is left out, and the others share its weight. The app says so: "Based on 7 of 9 areas". Adding a blood test or connecting Apple Health fills in the areas that need them.</p></section>
+  <section><h2>Where the targets come from</h2><p>Targets follow the American Heart Association, the American Diabetes Association, the US Preventive Services Task Force and the CDC. The "optimal" ranges are stricter than the normal ranges printed on a lab report.</p></section>
+  <section><h2>Atlas, the benchmark</h2><p>Atlas is a benchmark built from published lab averages of one very thoroughly tested person. Where lower or higher is simply better, the better number wins. Where there is a healthy range, a result inside the optimal range beats one outside it, two results inside it tie, and one too low against one too high is a tie. A test Atlas has no published value for takes no part. Health Atlas is not affiliated with that person.</p></section>
+  <section><h2>Challenge levels</h2><p>Levels for the fitness challenges come from published research where it exists. Where a level is our own estimate, the app marks it "est."</p></section>
+  <section><h2>What the score is not</h2><p>The Atlas score is a guide for general wellness. It is not a diagnosis, a risk estimate or medical advice, and it does not replace your doctor.</p></section>
+  <footer>Questions: <a href="mailto:healthatlassupport@gmail.com">healthatlassupport@gmail.com</a> · <a href="index.html">Health Atlas support</a> · <a href="privacy.html">Privacy</a></footer>
+</main>
+</body>
+</html>
