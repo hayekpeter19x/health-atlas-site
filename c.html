@@ -71,7 +71,7 @@ ol b { color: var(--ink); }
 // The part after "#" holds the challenge card. Browsers never send it to the website, so it stays between friends.
 (function () {
   var CH = [['plank', 'Plank', 't'], ['hang', 'Dead hang', 't'], ['wallsit', 'Wall sit', 't'], ['pushups', 'Push-ups', 'n', 'push-ups'], ['pullups', 'Pull-ups', 'n', 'pull-ups'],
-    ['steps', 'Steps', 'steps'], ['sleep', 'Good nights', 'sleep'], ['balance', 'One-leg balance', 't'], ['chair', 'Chair stands', 'n', 'stands in 30 seconds'], ['sitrise', 'Sit and rise', 'score'], ['vo2', 'VO₂ max', 'vo2'], ['kneepush', 'Knee push-ups', 'n', 'knee push-ups']];
+    ['steps', 'Steps', 'steps'], ['sleep', 'Good nights', 'sleep'], ['balance', 'One-leg balance', 't'], ['chair', 'Chair stands', 'n', 'stands in 30 seconds'], ['sitrise', 'Sit and rise', 'score'], ['vo2', 'VO₂ max', 'vo2'], ['kneepush', 'Knee push-ups', 'n', 'knee push-ups'], ['burpees', 'Burpees', 'n', 'burpees in 1 minute']];
   var code = (location.hash || '').slice(1);
   // getting the app: keep the challenge on the clipboard so the app can pick it up after installing
   document.getElementById('get').addEventListener('click', function () { try { navigator.clipboard.writeText(location.href); } catch (e) { /* no clipboard */ } });
